@@ -1,27 +1,66 @@
 #https://github.com/mafeiyang/ACTINN/blob/master/README.md
-#module load tensorflow/1.8.0
 
-#11-25-19; Mouse immune data (TRI)
+#pip install --user tables
 
-python actinn_format.py -i TRI_data/ -o TRI_output -f 10X_V2
-
-python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
--trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
--trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \
--ts TRI_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
-
-mv predicted_label.txt TRI_predicted_label.txt
+ml Python/3.6.4-foss-2018a-tf-1.10.1
 
 
-
-
-#11-26-19; Seurat demo data
+#Seurat demo data
 
 python actinn_format.py \
 -i /scratch/mf91122/scRNAseq_LSU/cellranger/Seurat/PBMC_sample_data/filtered_gene_bc_matrices/hg19/ \
 -o Seurat_demo_output -f 10X_V2
 
+module load tensorflow/1.8.0
+
 python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
 -trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
 -trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \ 
 -ts Seurat_demo_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+
+
+
+
+
+
+ml Python/3.6.4-foss-2018a-tf-1.10.1
+
+#11-25-19; Mouse immune data (TRI)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_format.py \
+-i /scratch/mf91122/scRNAseq_LSU/cellranger/LSU_84266_TRI_run1/outs/filtered_feature_bc_matrix \ 
+-o /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/TRI_output \
+-f 10X_V3
+
+
+#Mouse immune data (C1)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_format.py \
+-i /scratch/mf91122/scRNAseq_LSU/cellranger/LSU_84268_C1_run3/outs/filtered_feature_bc_matrix \
+-o /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/C1_output \
+-f 10X_V3
+
+
+module load tensorflow/1.8.0
+
+#11-25-19; Mouse immune data (TRI)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \
+-ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/TRI_output.h5 \
+-lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+
+mv predicted_label.txt TRI_predicted_label.txt
+mv predicted_probabilities.txt TRI_predicted_probabilities.txt
+
+#Mouse immune data (C1)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \
+-ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/C1_output.h5 \
+-lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+
+mv predicted_label.txt C1_predicted_label.txt
+mv predicted_probabilities.txt C1_predicted_probabilities.txt
+
+
+
+
