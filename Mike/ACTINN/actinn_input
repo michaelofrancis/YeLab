@@ -1,8 +1,9 @@
 #https://github.com/mafeiyang/ACTINN/blob/master/README.md
+#https://figshare.com/articles/ACTINN/8967116/2
 
 #pip install --user tables
 
-ml Python/3.6.4-foss-2018a-tf-1.10.1
+#ml Python/3.6.4-foss-2018a-tf-1.10.1
 
 
 #Seurat demo data
@@ -15,7 +16,7 @@ module load tensorflow/1.8.0
 
 python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
 -trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
--trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \ 
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gzpyt \ 
 -ts Seurat_demo_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
 
 
@@ -60,6 +61,40 @@ python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.
 
 mv predicted_label.txt C1_predicted_label.txt
 mv predicted_probabilities.txt C1_predicted_probabilities.txt
+
+
+
+#Better training data?
+
+module load tensorflow/1.8.0
+
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_10x_cleaned.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_10x_cleaned_label.txt.gz \ 
+-ts Seurat_demo_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+
+mv predicted_label.txt Seurat2_predicted_label.txt
+mv predicted_probabilities.txt Seurat2_predicted_probabilities.txt
+
+
+tma_10x_cleaned.h5
+
+
+#best results with Seurat dataset: test5_.sh
+
+
+#PBS -S /bin/bash
+#PBS -q highmem_q
+#PBS -N ACTINN4_both_Seurat
+#PBS -l nodes=1:ppn=8
+#PBS -l walltime=480:00:00
+#PBS -l mem=200gb
+
+module load tensorflow/1.8.0
+
+cd /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master
+
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py -trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned.h5 -trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned_label.txt.gz -ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/Seurat_demo_output.h5
 
 
 
