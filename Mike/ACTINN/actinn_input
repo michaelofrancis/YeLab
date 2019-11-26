@@ -15,4 +15,7 @@ python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.
 
 python actinn_format.py -i /scratch/mf91122/scRNAseq_LSU/cellranger/Seurat/PBMC_sample_data/filtered_gene_bc_matrices/hg19/ -o Seurat_demo_output -f 10X_V2
 
-python actinn_predict.py -trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 -trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz -ts Seurat_demo_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/train_set_10x_new.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/test_data/train_label.txt.gz \ 
+-ts Seurat_demo_output.h5 -lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
