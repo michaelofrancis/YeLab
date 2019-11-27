@@ -94,8 +94,29 @@ module load tensorflow/1.8.0
 
 cd /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master
 
-python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py -trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned.h5 -trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned_label.txt.gz -ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/Seurat_demo_output.h5
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned_label.txt.gz \
+-ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/Seurat_demo_output.h5
 
+#11-26-19; Mouse immune data (TRI)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned_label.txt.gz \
+-ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/TRI_output.h5 \
+-lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
 
+mv predicted_label.txt TRI_predicted_label.txt
+mv predicted_probabilities.txt TRI_predicted_probabilities.txt
+
+#Mouse immune data (C1)
+python /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/actinn_predict.py \
+-trs /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned.h5 \
+-trl /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/training_data/8967116/tma_both_cleaned_label.txt.gz \
+-ts /scratch/mf91122/scRNAseq_LSU/ACTINN/ACTINN/ACTINN-master/C1_output.h5 \
+-lr 0.0001 -ne 50 -ms 128 -pc True -op FALSE
+
+mv predicted_label.txt C1_predicted_label.txt
+mv predicted_probabilities.txt C1_predicted_probabilities.txt
 
 
